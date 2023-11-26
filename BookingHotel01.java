@@ -6,7 +6,7 @@ public class BookingHotel01 {
 
         int pilihan;
         double saldo = 0;
-        String[] daftarKamar = { "Kamar Standar Rp. ", "Kamar Deluxe Rp. ", "Suite Rp. " };
+        String[] daftarKamar = { "Kamar Standar ", "Kamar Deluxe ", "Kamar Suite " };
         double[] hargaKamar = { 200000, 400000, 800000 };
         int pilihanKamar;
         int[] ketersediaanKamar = { 5, 3, 2 };
@@ -52,15 +52,14 @@ public class BookingHotel01 {
             } else if (pilihan == 2) {
                 System.out.println("Daftar Kamar:");
                 for (int i = 0; i < daftarKamar.length; i++) {
-                    System.out.println((i + 1) + ". " + daftarKamar[i] + hargaKamar[i] + "/malam - Tersedia: "
-                            + ketersediaanKamar[i]);
+                    System.out.println((i + 1) + ". " + daftarKamar[i] + hargaKamar[i] + "/malam - Tersedia: " + ketersediaanKamar[i]);
                 }
 
                 System.out.print("Pilih jenis kamar (1/2/3): ");
                 pilihanKamar = input.nextInt();
                 pilihanKamar--;
 
-                if (pilihanKamar >= 0 && pilihanKamar <= daftarKamar.length) {
+                if (pilihanKamar >= 0 && pilihanKamar < daftarKamar.length) {
                     if (ketersediaanKamar[pilihanKamar] > 0) {
                         System.out.print("Jumlah kamar: ");
                         int jumlahKamar = input.nextInt();
@@ -76,12 +75,11 @@ public class BookingHotel01 {
                         if (saldo >= totalPembayaran) {
                             saldo -= totalPembayaran;
                             ketersediaanKamar[pilihanKamar] -= jumlahKamar;
-                            kamarTerbooking[jumlahKamarTerbooking] = daftarKamar[pilihanKamar] + " - " + jumlahKamar
-                                    + " Kamar - " + jumlahHari + " hari";
+                            kamarTerbooking[jumlahKamarTerbooking] = daftarKamar[pilihanKamar] + " - " + jumlahKamar+ " Kamar - " + jumlahHari + " hari";
                             jumlahKamarTerbooking++;
                             System.out.println("Pembayaran berhasil!");
                             System.out.println("Sisa saldo anda: " + saldo);
-                            System.out.println("Sisa kamar " + daftarKamar[pilihanKamar] + ": " + ketersediaanKamar[jumlahKamar-1]);
+                            System.out.println("Sisa kamar " + daftarKamar[pilihanKamar] + ": " + ketersediaanKamar[pilihanKamar]);
 
                         } else {
                             System.out.println("Saldo tidak mencukupi untuk pembayaran ini.");
@@ -95,7 +93,8 @@ public class BookingHotel01 {
                 }
 
             } else if (pilihan == 3) {
-                System.out.print("Kamar yang sudah terbooking: ");
+                System.out.println("Kamar yang sudah terbooking: ");
+                       
                 if (jumlahKamarTerbooking == 0) {
                     System.out.println("Belum ada kamar yang terbooking.");
                      System.out.println("Kembali ke menu? (y/n)");
@@ -110,7 +109,17 @@ public class BookingHotel01 {
                 } else {
                     for (int i = 0; i < jumlahKamarTerbooking; i++) {
                         System.out.println(kamarTerbooking[i]);
+                        
                     }
+                     System.out.println("Kembali ke menu? (y/n)");
+                        next = input.nextLine();
+
+                        if (next.equalsIgnoreCase("y")) {
+                            continue;
+                        }
+                        if (next.equalsIgnoreCase("n")) {
+                            break;
+                        }
                 }
 
             } else if (pilihan == 4) {
